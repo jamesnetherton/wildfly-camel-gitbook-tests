@@ -14,15 +14,23 @@ import java.util.List;
 
 public class GitBookCrawler extends WebCrawler {
 
-    private static int HTTP_OK = 200;
     private static List<String> crawledUrls = new ArrayList<String>();
-    private static List<Page> failedPages = new ArrayList<Page>();
     private static List<String> excludedPaths = new ArrayList<String>();
+    private static List<String> failures = new ArrayList<String>();
 
     public GitBookCrawler() {
         excludedPaths.add("gitbook.com");
         excludedPaths.add("hostname");
         excludedPaths.add("console");
+    }
+
+    @Override
+    protected void onUnexpectedStatusCode(String urlStr, int statusCode, String contentType, String description) {
+        super.onUnexpectedStatusCode(urlStr, statusCode, contentType, description);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("[").append(statusCode).append("] ").append(urlStr);
+        failures.add(builder.toString());
     }
 
     @Override
@@ -49,9 +57,6 @@ public class GitBookCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         System.out.println(page.getWebURL().getURL());
-        if (page.getStatusCode() != HTTP_OK) {
-            failedPages.add(page);
-        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -80,10 +85,10 @@ public class GitBookCrawler extends WebCrawler {
 
         controller.start(GitBookCrawler.class, numberOfCrawlers);
 
-        if (failedPages.size() > 0) {
-            System.out.println("Failed pages:\n\n");
-            for(Page failedPage : failedPages) {
-               System.out.println("[" + failedPage.getStatusCode() + "] " + failedPage.getWebURL().getURL());
+        if (failures.size() > 0) {
+            System.out.println("Failures:\n");
+            for(String failure: failures) {
+               System.out.println(failure);
             }
             System.exit(1);
         }
