@@ -9,5 +9,6 @@ dependencies:
 
 test:
   override:
-    - docker run -p 4000:4000 -v ${PWD}:/gitbook tobegit3hub/gitbook-server; sleep 10
-    - mvn exec:java -Dexec.mainClass="com.jamesnetherton.GitBookCrawler
+    - docker run -d -p 4000:4000 -v ${PWD}:/gitbook tobegit3hub/gitbook-server; sleep 10
+    - mvn clean install
+    - mvn exec:java -Dexec.mainClass=com.jamesnetherton.GitBookCrawler
