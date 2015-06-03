@@ -1,0 +1,13 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker pull tobegit3hub/gitbook-server
+    - git clone -b ${GIT_TAG} https://github.com/wildfly-extras/wildfly-camel-book.git
+
+test:
+  override:
+    - docker run -p 4000:4000 -v ${PWD}:/gitbook tobegit3hub/gitbook-server; sleep 10
+    - mvn exec:java -Dexec.mainClass="com.jamesnetherton.GitBookCrawler
