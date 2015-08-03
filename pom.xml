@@ -11,6 +11,11 @@
   <url>https://github.com/jamesnetherton/wildfly-camel-gitbook-tests</url>
 
   <properties>
+    <version.crawler4j>4.1</version.crawler4j>
+    <version.slf4j>1.7.10</version.slf4j>
+    <version.maven.compiler.plugin>3.2</version.maven.compiler.plugin>
+    <version.maven.exec.plugin>1.3.2</version.maven.exec.plugin>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -18,12 +23,34 @@
     <dependency>
       <groupId>edu.uci.ics</groupId>
       <artifactId>crawler4j</artifactId>
-      <version>4.1</version>
+      <version>${version.crawler4j}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>1.7.10</version>
+      <version>${version.slf4j}</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.maven.compiler.plugin}</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${version.maven.exec.plugin}</version>
+        <configuration>
+          <mainClass>com.jamesnetherton.gitbook.crawler.GitBookTestRunner</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

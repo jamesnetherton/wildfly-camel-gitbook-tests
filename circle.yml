@@ -11,4 +11,4 @@ test:
   override:
     - docker run -d -p 4000:4000 -v ${PWD}/wildfly-camel-book:/gitbook tobegit3hub/gitbook-server; sleep 10
     - mvn clean install
-    - mvn exec:java -Dexec.mainClass=com.jamesnetherton.GitBookCrawler
+    - mvn exec:java
