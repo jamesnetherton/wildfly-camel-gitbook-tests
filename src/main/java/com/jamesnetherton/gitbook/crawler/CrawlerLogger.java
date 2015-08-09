@@ -4,5 +4,5 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public interface CrawlerLogger {
-    Logger log = LoggerFactory.getLogger(CrawlerRecorder.class);
+    Logger log = LoggerFactory.getLogger(CrawlerLogger.class);
 }
