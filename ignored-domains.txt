@@ -3,3 +3,4 @@ hostname
 console
 wildfly-camel.elasticbeanstalk.com
 sap-ag.de
+websmp202
