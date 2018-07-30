@@ -14,22 +14,19 @@ public class CrawlerConfig {
     private static List<String> excludedDomains;
 
     public static int getConnectionTimeout() {
-        String timeout = getEnvironmentVariable(CrawlerConfigKey.CONNECTION_TIMEOUT);
-        return Integer.parseInt(timeout);
+        return Integer.parseInt(CrawlerConfigKey.CONNECTION_TIMEOUT.getValue());
     }
 
     public static int getCrawlDepth() {
-        String depth = getEnvironmentVariable(CrawlerConfigKey.CRAWL_DEPTH);
-        return Integer.parseInt(depth);
+        return Integer.parseInt(CrawlerConfigKey.CRAWL_DEPTH.getValue());
     }
 
     public static String getCrawlUrl() {
-        return getEnvironmentVariable(CrawlerConfigKey.CRAWL_URL);
+        return CrawlerConfigKey.CRAWL_URL.getValue();
     }
 
     public static int getDelay() {
-        String delay = getEnvironmentVariable(CrawlerConfigKey.DELAY);
-        return Integer.parseInt(delay);
+        return Integer.parseInt(CrawlerConfigKey.DELAY.getValue());
     }
 
     public static List<String> getExcludedDomains() {
@@ -40,31 +37,23 @@ public class CrawlerConfig {
     }
 
     public static String getIgnoredDomainsPath() {
-        return getEnvironmentVariable(CrawlerConfigKey.IGNORED_DOMAINS_PATH);
+        return CrawlerConfigKey.IGNORED_DOMAINS_PATH.getValue();
     }
 
     public static int getMaxConnections() {
-        String maxConnections = getEnvironmentVariable(CrawlerConfigKey.MAX_CONNECTIONS);
-        return Integer.parseInt(maxConnections);
+        return Integer.parseInt(CrawlerConfigKey.MAX_CONNECTIONS.getValue());
     }
 
     public static int getMaxThreads() {
-        String maxThreads = getEnvironmentVariable(CrawlerConfigKey.MAX_THREADS);
-        return Integer.parseInt(maxThreads);
+        return Integer.parseInt(CrawlerConfigKey.MAX_THREADS.getValue());
     }
 
     public static int getSocketTimeout() {
-        String timeout = getEnvironmentVariable(CrawlerConfigKey.SOCKET_TIMEOUT);
-        return Integer.parseInt(timeout);
+        return Integer.parseInt(CrawlerConfigKey.SOCKET_TIMEOUT.getValue());
     }
 
     public static String getStorageFolder() {
-        return getEnvironmentVariable(CrawlerConfigKey.STORAGE_FOLDER);
-    }
-
-    private static String getEnvironmentVariable(CrawlerConfigKey configKey) {
-        String value = System.getenv(configKey.name());
-        return value != null ? value : configKey.getValue();
+        return CrawlerConfigKey.STORAGE_FOLDER.getValue();
     }
 
     private static List<String> loadExcludedDomains() {

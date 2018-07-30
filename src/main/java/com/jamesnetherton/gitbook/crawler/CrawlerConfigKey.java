@@ -18,6 +18,7 @@ public enum CrawlerConfigKey {
     }
 
     public String getValue() {
-        return this.value;
+        String override = System.getenv(this.name());
+        return override != null ? override : this.value;
     }
 }
